@@ -1,0 +1,59 @@
+10/03/2025 (Lezione di ChatGPT)
+
+    + Rinominare il file come la classe pubblica
+    + Sintassi uguale al C 
+        - Commenti con // o /* ... */
+        - Ecc..
+    + Ci deve sempre essere il metodo "main"
+        e.g.
+            public static void main(String[] args) {
+                // Codice qui
+            }
+    + Per vedere warning utili si può usare il comando "javac -Xlint"
+    + Per eseguire un file java bisogna prima compilarlo con il comando "javac <nomeFile>.java" ed eseguirlo con il comando "java <nomeFile> <arg1> <arg2> ..."
+
+    + Struttura codice .java
+        package ...;                    //opzionale, si usa per mettere insieme diversi file per un unico grande progetto
+
+        import ...;                     //importazione librerie esterne come: java.util.Scanner (per leggere gli input da tastiera), java.util.ArrayList (per creare liste dinamiche)
+
+        public class MioProgramma {     //nome della classe public uguale al nome del file, stile: CamelCase, ci può essere UNA SOLA CLASSE PUBLIC, questa è la classe esterna PRINCIPALE perchè contiene il metodo "main"
+            
+            public static void main(String[] args) {    //metodo per il "corpo" del programma
+                //inizio del vero e proprio programma
+            }
+
+            public ClasseAnnidata() {                   //Classe annidata pubblica
+                //corpo della ClasseAnnidata
+            }
+
+        }
+
+        class SecondaClasse {           //seconda classe, senza public perchè ci può essere solo una classe public
+            //corpo classe secondaria
+        }
+
+    + ATTENZIONE:
+        - La classe chiamata PRINCIPALE è solitamente quella classe che:
+            * Contiene il metodo "main"
+            * Ha lo stesso nome del file che lo contiene
+            * è l'unica classe esterna dichiarata public
+        - Ci può essere una sola classe esterna public, mentre le classi annidate, sia dentro la classe principali che secondarie, possono essere dichiarate più classi public;
+            Quindi nella classe principale ci possono essere classi annidate pubbliche,
+            Le classi secondarie, dichiarate fuori dalla classe principale, non decono avere la keyword public nella sua dichiarazione, ma al suo interno, le sue classi annidate possono essere pubbliche
+        - Differenza tra "static" e non static:
+            * La keyword "static" indica un membro appartenente alla classe e non alle singole istanze,
+                il che vuol dire che una istanza della classe condividerà la variabile o qualsiasi membro denominato static uguale a qualsiasi altra istanza
+            * Un membro non dichiarato "static" significa che verrà creata un'istanza di quello stesso membro all'interno di una istanza della classe
+                Quindi una variabile non dichiarata static se viene modificata all'interno di una istanza non influisce il valore di altre istanze, rendendoli assestanti
+        - Differenza tra "public" e "private":
+            * public permette di avere un membro accessibile da qualsiasi altra classe (usato per interfacce e metodi di servizio)
+            * private permette invece di avere un membro accessibile solo all'interno della classe in cui viene dichiarato, fondamentale per l'incapsulamento e la protezione dei dati
+        - Cosa vuol dire "String[] args" nella dichiarazione del metodo main?
+            * "String[] args" è il parametro che si passa nel metodo main e serve per ricevere argomenti dalla riga di comando
+            * e.g. per passare dei parametri al main una volta fatto il comando come scritto all'inizio del file bisogna:
+                1. compilarlo tramite il comando: "javac <nomeFile>.java"
+                2. eseguirlo tramite il comando: "java <nomeFile> <arg1> <arg2> ..."
+                    -> essendo args un array di stringhe possiamo passarci n parametri, rilevati successivamente con "args.length", un intero che rappresenta la quantità di elementi nell'array args
+
++-----------------------------------------------------------------------------------------------------------+
