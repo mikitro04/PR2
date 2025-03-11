@@ -13,7 +13,7 @@
     + Per eseguire un file java bisogna prima compilarlo con il comando "javac <nomeFile>.java" ed eseguirlo con il comando "java <nomeFile> <arg1> <arg2> ..."
 
     + Struttura codice .java
-        package ...;                    //opzionale, si usa per mettere insieme diversi file per un unico grande progetto
+         ...;                    //opzionale, si usa per mettere insieme diversi file per un unico grande progetto
 
         import ...;                     //importazione librerie esterne come: java.util.Scanner (per leggere gli input da tastiera), java.util.ArrayList (per creare liste dinamiche)
 
@@ -38,13 +38,13 @@
             * Contiene il metodo "main"
             * Ha lo stesso nome del file che lo contiene
             * è l'unica classe esterna dichiarata public
-        - Ci può essere una sola classe esterna public, mentre le classi annidate, sia dentro la classe principali che secondarie, possono essere dichiarate più classi public;
+        - Ci può essere una sola classe esterna public, mentre le classi annidate, possono essere dichiarate più classi public;
             Quindi nella classe principale ci possono essere classi annidate pubbliche,
-            Le classi secondarie, dichiarate fuori dalla classe principale, non decono avere la keyword public nella sua dichiarazione, ma al suo interno, le sue classi annidate possono essere pubbliche
+            Per convenzione creiamo una sola classe esterna (quella principale)
         - Differenza tra "static" e non static:
             * La keyword "static" indica un membro appartenente alla classe e non alle singole istanze,
-                il che vuol dire che una istanza della classe condividerà la variabile o qualsiasi membro denominato static uguale a qualsiasi altra istanza
-            * Un membro non dichiarato "static" significa che verrà creata un'istanza di quello stesso membro all'interno di una istanza della classe
+                il che vuol dire che quel membro sarà una risorsa condivisa in comune con tutte le istanze della classe
+            * Un membro non dichiarato "static" significa che verrà creata una copia di quello stesso membro all'interno di ogni istanza della classe
                 Quindi una variabile non dichiarata static se viene modificata all'interno di una istanza non influisce il valore di altre istanze, rendendoli assestanti
         - Differenza tra "public" e "private":
             * public permette di avere un membro accessibile da qualsiasi altra classe (usato per interfacce e metodi di servizio)
@@ -57,3 +57,158 @@
                     -> essendo args un array di stringhe possiamo passarci n parametri, rilevati successivamente con "args.length", un intero che rappresenta la quantità di elementi nell'array args
 
 +-----------------------------------------------------------------------------------------------------------+
+11/03/2025 (Sempre ChatGPT)
+
+    Oltre alla keyword public e private esiste anche la keyword protected:
+        + La keyword protected permette di rendere accessibile un membro alla stessa classe, alle classi dello stesso package e alle sottoclassi(anche in un altro package)
+        + Torna più utile in un concetto di ereditarietà
+        + Permette di proteggere l'accesso dei dati a classi non correlate ma di consentire l'uso alle sottoclassi
+        + Se il membro deve essere accessibile solo alla classe stessa conviene usare public, al contrario se deve essere accessibile a tutti si usa public
+        + Una classe esterna non può essere dichiarata protected, al più "public" o "package-private" usato di default in assenza di public
+
+    * Una classe (so cos'è non approfondirò l'argomento) è strutturata in questo modo:
+        class NomeClasse {          //le classi sempre con iniziale maiuscola
+            //Attributi
+            int dimensione;
+            ...
+
+            //Costruttore, utilizzato per inizializzare gli oggetti
+            Public NomeClasse (tipo attr1, tipo attr2, ...) {
+                this.arg1 = arg1;           //nel caso parametro del costruttore e attributo della classe abbiano lo stesso nome si usa this. per riferirsi all'attributo della classe
+                dimensione = attr2;         //in caso contrario si può non usare
+                ...
+            }
+
+            //Metodi
+            public tipo nomeMetodo() {          //nome del metodo con iniziale minuscola
+                /*Corpo del metodo*/
+            }
+        }
+
+        ESEMPIO:
+
+        class Persona {
+            // Attributi
+            String nome;
+            int eta;
+
+            // Costruttore
+            public Persona(String nome, int eta) {
+                this.nome = nome;
+                this.eta = eta;
+            }
+
+            // Metodi
+            public void saluta() {
+                System.out.println("Ciao, mi chiamo " + nome + " e ho " + eta + " anni.");
+            }
+        }
+
+    * Il concetto di ereditarietà permette ad una classe di ereditare Attributi e Metodi di un'altra classe (o superclasse), e ridefinirne i Metodi o aggiungere degli Attributi e si dichiara così:
+        
+        //Superclasse
+        class SuperClasse {
+            //Attributi
+            int attr1;
+
+            //Costruttore
+            public SuperClasse(int attr1) {
+                this.attr1 = attr1;
+            }
+
+            //Metodi
+            public int getAttr() {
+                return attr1;
+            }
+        }
+
+        //Classe derivata 
+        class ClasseDerivata extend SuperClasse {
+            //Eventuali attributi aggiuntivi
+            int attr2;
+
+            //Costruttore
+            public ClasseDerivata(int attr1, int attr2) {
+                super(attr1);           //costruttore della superclasse
+                this.attr2 = attr2;
+            }
+
+            //Metodi
+            public getAttr() {
+                return (attr1 + attr2);
+            }
+        }
+
+    * Esistono quattro diversi tipi di ereditarietà:
+        + Ereditarietà Singola:
+            - Una sottoclasse eredita da una sola superclasse
+        + Ereditarietà Multilivello:
+            - Una sottoclasse eredia da un'altra sottoclasse
+        + Ereditarietà Gerarchica:
+            - Più classi ereditano da una stessa superclasse
+        + Ereditarietà Multipla:
+            - In Java una classe non può ereditare da più classi contemporaneamente, in questo caso si utilizzano le interfacce, quindi una classe eredita da una sola superclasse ma può implementare diverse interfacce
+            - Esempio:
+                //Superclasse
+                class SuperClasse {
+                    //Attributi
+                    int attr1;
+
+                    //Costruttore
+                    public SuperClasse(int attr1) {
+                        this.attr1 = attr1;
+                    }
+
+                    //Metodi
+                    public int getAttr() {
+                        return attr1;
+                    }
+                }
+
+                //Esempio Interfaccia
+                interface Interface1 {          //come per le classi, il nome delle interfacce con iniziale maiuscola
+                    //Macro
+                    int MACRO = 123;                  //viene definita automaticamente come "public static final", ovvero pubblica per tutti e comune per tutte le istanze. final significa che non può essere modificata
+
+                    //Metodi
+                    int metodo1();             //metodo che deve essere implementato 
+                }
+
+                //Classe derivata 
+                class ClasseDerivata extend SuperClasse implements Interface1 {
+                    //Eventuali attributi aggiuntivi
+                    int attr2;
+
+                    //Costruttore
+                    public ClasseDerivata(int attr1, int attr2) {
+                        super(attr1);           //costruttore della superclasse
+                        this.attr2 = attr2;
+                    }
+
+                    //Metodi
+                    public getAttr() {
+                        return (attr1 + attr2);
+                    }
+
+                    @Override
+                    public void metodo1() {
+                        return attr2 * 2;
+                    }
+                }
+
+    * Quando si deve ridefinire un metodo si usa sempre @Override prima per evitare errori
+
+    La stampa su terminale funziona tramite System.out.<comando>
+        + Tra i comandi che si possono usare ne usiamo al momento 2:
+            - printf, che ha lo stesso utilizzo dello printf del C
+                + Per specificare il formato delle variabili usiamo:
+                    * %d -> numeri interi
+                    * %f -> numeri decimali (float e double)
+                    * %s -> stringhe
+                    * %n è l'equivalente di \n, quindi new line. Si potrbbe anche usare \n ma è consiglaibile usare %n perchè è più portabile
+            - println, stampa e va a capo
+                + Non può avere formattazione
+            - print, stampa senza andare a capo
+            
++-----------------------------------------------------------------------------------------------------------+
+
