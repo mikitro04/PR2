@@ -209,6 +209,17 @@
             - println, stampa e va a capo
                 + Non può avere formattazione
             - print, stampa senza andare a capo
-            
-+-----------------------------------------------------------------------------------------------------------+
-
+                
+    Per eseguire l'input da tastiera bisogna:
+        + includere le librerie utils: "import java.util.*;"
+        + inizializzare un oggetto di tipo Scanner per indicare al programma che l'input viene da tastiera 
+            Scanner scanner = new Scanner(System.in);
+        + Dopodichè l'input da tastiera viene indirizzato direttamente in una variabile secondo diversi comandi:
+            - nextLine() -> Stringa (tutta la riga)
+            - next() -> Singola parola
+            - nextInt() -> Numero intero
+            - nextDouble() -> Numero decimale
+            Quindi per esempio: 
+            - String stringa = scanner.nextLine();
+            scanner è l'oggetto di tipo Scanner creato precedentemente
+        + Infine si chiude l'input da tastiera tramite il comando "scanner.close();"
