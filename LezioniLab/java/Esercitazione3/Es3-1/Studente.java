@@ -40,4 +40,10 @@ public class Studente extends Persona {
             return super.calcolaCostoBiglietto(costoIntero);
         }
     }
+
+    @Override
+    public String toString(){
+        String s = super.toString() + " Matricola: " + getMatricola() + " Anno di iscrizione: " + getAnnoDiIscrizione();
+        return s;
+    }
 }

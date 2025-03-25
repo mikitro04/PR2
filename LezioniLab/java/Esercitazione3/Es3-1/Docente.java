@@ -24,4 +24,10 @@ public class Docente extends Persona {
     public double calcolaCostoBiglietto(double costoIntero) {
         return ((costoIntero * 10) / 100);
     }
+
+    @Override
+    public String toString(){
+        String s = super.toString() + " Insegnamento: " +  getInsegnamento();
+        return s;
+    }
 }

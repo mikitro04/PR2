@@ -48,4 +48,10 @@ public class Persona {
             return costoIntero;
         }
     }
+
+    @Override
+    public String toString(){
+        String s = "Nome: " + this.getNome() + " Cognome: " + this.getCognome();
+        return s;
+    }
 }

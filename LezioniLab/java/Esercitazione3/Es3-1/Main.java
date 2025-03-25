@@ -60,5 +60,18 @@ public class Main {
         
         /*------------------ ESERCIZIO 4 ------------------ */
         System.out.printf("+--------------------------------------------+\n");
+
+        Persona p = new Persona("Mario", "Rossi", 45);
+        Studente s = new Studente("Anna", "Bianchi", 22, 12345, 2022);
+        Docente d = new Docente("Lucia", "Verdi", 50, "Matematica");
+
+        System.out.println("PERSONA:");
+        System.out.println(p); // chiamata implicita a toString()
+
+        System.out.println("\nSTUDENTE:");
+        System.out.println(s);
+
+        System.out.println("\nDOCENTE:");
+        System.out.println(d);
     }
 }
