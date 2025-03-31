@@ -123,7 +123,7 @@
         }
 
         //Classe derivata 
-        class ClasseDerivata extend SuperClasse {
+        class ClasseDerivata extends SuperClasse {
             //Eventuali attributi aggiuntivi
             int attr2;
 
@@ -134,7 +134,7 @@
             }
 
             //Metodi
-            public getAttr() {
+            public int getAttr() {
                 return (attr1 + attr2);
             }
         }
@@ -175,7 +175,7 @@
                 }
 
                 //Classe derivata 
-                class ClasseDerivata extend SuperClasse implements Interface1 {
+                class ClasseDerivata extends SuperClasse implements Interface1 {
                     //Eventuali attributi aggiuntivi
                     int attr2;
 
@@ -186,7 +186,7 @@
                     }
 
                     //Metodi
-                    public getAttr() {
+                    public int getAttr() {
                         return (attr1 + attr2);
                     }
 
@@ -223,3 +223,171 @@
             - String stringa = scanner.nextLine();
             scanner è l'oggetto di tipo Scanner creato precedentemente
         + Infine si chiude l'input da tastiera tramite il comando "scanner.close();"
+
++-----------------------------------------------------------------------------------------------------------+
+31/03/2025 (Di nuovo ChatGPT ma a sto giro Plus)
+
+Modificatori:
+    I modificatori sono keyword che permettono di definire meglio il comportamento di classi, metodi, ecc..
+    Sono divisibili in 2 differenti gruppi:
+     - Modificatori di accesso (chi può vedere cosa)
+        Questo gruppo è formato da 4 keyword:
+         + Private
+            Un membro dichiarato "private" è visobile solo all'interno della classe in cui è stato dichiarato
+            Viene usato per protegegre i dati e "forzare" l'uso di metodi getter e setter
+         + Public
+            Il membro è accessibile da qualsiasi altra classe a prescindere dal package in cui si trova
+         + Protected 
+            Un membro "protected" può essere usato:
+             * All'interno della stessa classe
+             * All'interno di altre classi dello stesso package
+             * All'interno delle sottoclassi (anche se dichiarate in package diversi)
+         + uso default senza modificatori (package-private)
+            Quando non è presente nessun modificatore si applica di default "package-private" ovvero può essere utilizzato da classi dello stesso package
+
+     - Modificatori non di accesso (come si comporta un'entità nel programma)
+        Questo tipo di modificatori non gestisce la visibilità ma il comportamento del membro nel programma
+         + static
+            Questo si usa per indicare un membro non appartenente alle singole istanze ma all'intera classe
+            I membri definiti static sono condivisi con tutte le istanze di quella classe
+         + final
+            Un membro definito final si comporta come una costante:
+             * Non può essere modificato dopo l'assegnazione
+             * Non può essere sovrascritto nelle sottoclassi
+         + abstract 
+            Serve per definire metodi o classi incomplete (vediamo più avanti nel dettaglio)
+
+Package:
+    Un package è una struttura logico-fisica che serve per organizzare le classi
+    I package definiscono non solo la struttura estetica del programma ma anche la visibilità (vedi protected e package-private)
+        - Dichiarazione:
+            Per mettere un file all'interno di un package si usa la direttiva "package"
+            e.g. Persona.java
+            +----------------------------------+               mio/
+            | package mio.progetto.modello     |                 └── progetto/
+            |                                  |                       └── modello/
+            | public class Persona             |                               └── Persona.java
+            +----------------------------------+
+            questo dice al compilatore che la classe Persona si trova all'interno del percorso mio/progetto/modello/ (cartelle annidate)
+            
+        - Importare classi da un altro package:
+            e.g. Una volta dichiarata la classe Main, al di fuori del package di Persona, si può importare quella classe mettendo:
+            +---------------------------------------+
+            | import mio.progetto.modello.Persona   |
+            |                                       |
+            | public class Main                     |
+            +---------------------------------------+
+            Se si volesse invece importare tutte le classi all'interno di quel package si usa l'asterisco *
+            +---------------------------------------+
+            | import mio.progetto.modello.*         |
+            |                                       |
+            | public class Main                     |
+            +---------------------------------------+
+            In compilazione si fa:
+            \\\bash
+                javac mio/progetto/modello/Persona.java
+                javac -cp . main/Main.java
+            \\\
+            L'opzione "-cp ." serve per indicare che quel file verrà usato come classpath ovevro dovrà caricare altri package
+            -cp . serve per iniziare a cercare altre classi (cp) dalla cartella corrente (.)(la cartella con cui stai operado nel terminale)
+            (Quest'opzione va usata per tutti i file che contengono import di qualche package)
+            Se ho due file .java non è necessario fare nessun import
+
+        - Classi senza package:
+            Quando non viene dichiarato nessun package, questo viene creato di default (sempre meglio dichiararlo)
+            Per esercizi veloci si può non dichiarare il package del main
+Array:
+    Vabbè se stai leggendo gli appunti di PR2 spero tu sappia cos'è un array e non andrò oltre 
+    In più c'è da sapere che puoi fare array di classi 
+        - Dichiarazione:
+            Il modo consigliato di dichiarare un array è:
+                int[] array;
+            Puoi farlo anche in stile C/C++ ma risulta meno chiaro, quindi fallo così
+            Un altro modo per dichiararlo è:
+                int[] array = new int[5];
+        - Inizializzazione:
+             + Esplicita
+                (Discorso valido per ogni tipo di array)
+                int[] array = {1, 2, 3, 4, 5, 6};
+        - Accesso:
+            Identico al C, quindi il primo elemento dell'array si trova in posizione 0
+        - Cicli:
+            Stessa cosa del C
+        - E.g. di dichiarazione e inizializzazione di un array di tipo Persona:
+          +--------------------------------------------------+
+          |  ...                                             |
+          |  Persona[] elenco = new Persona[3];              |
+          |                                                  |
+          |  elenco[0] = new Persona("Luca", "Rossi", 30);   |
+          |  elenco[1] = new Persona("Anna", "Bianchi", 25); |
+          |  elenco[2] = new Persona("Marco", "Neri", 40);   |
+          |  ...                                             |
+          +--------------------------------------------------+
+        - Matrici:
+            funzionano allo stesso modo del C e dichiarazione come array 
+            e.g.
+                int[][] matrix = new int[5][4];     //5 righe e 4 colonne
+        - Array dinamici
+            Si usa ArrayList (ne approfindiremo in seguito)
+        - Grandezza:
+            La grandezza è definita staticamente, ci si può accedere usando nome_array.length
+
+Wrapping classes:
+    In Java esistono diversi tipi primitivi (int, float, double, boolean, char, long, byte e short) che NON SONO OGGETTI, 
+     spesso però potrebbe essere utile definirli tali, per esempio quando creaiamo ArrayList o HashMap ecc..
+        Le classi Wrapper sono quindi delle classi che "avvolgono" un tipo primitivo, vediamoli:
+            - int       ->  Integer
+            - float     ->  Float
+            - double    ->  Double
+            - boolean   ->  Boolean
+            - char      ->  Character
+            - long      ->  Long
+            - byte      ->  Byte
+            - short     ->  Short
+        La loro dichiarazione è definita con il costruttore valueOf()
+        e.g.
+            Integer numeroWrapper = Integer.valueOf(5);
+
+    - Autoboxing:
+        Con Java 5 è stato introdotto l'Autoboxineg, ovvero la conversione implicita da primitivo a classe Wrapper
+        e.g.
+            int numero = 5;
+            Integer oggetto = numero;
+
+    - Unboxing:
+        É l'inverso del ìl'Autoboxing, ovvero converte implicitamente un Wrapper a un primitivo
+        e.g. 
+            Integer x = 20;
+            int y = x;
+
+Classi Astratte:
+    Una classe astratta, definita con la keyword "abstract", è una particolare tipo di classe che non può essere istanziata direttamente, 
+    ma serve come base per altre classi con la quale si estendono usando "extends"
+
+    La usiamo per "obbligare" alle sottoclassi ad impiegare certi comportamenti, evitare di duplicare codice nelle sottoclassi o per avere una base modello
+    e.g. della sintassi
+        +----------------------------------------------------+
+        | public abstract class Animale{                     |
+        |     String nome;                                   |
+        |                                                    |
+        |     // Costruttore                                 |
+        |     public Animale(String nome) {                  |
+        |         this.nome = nome;                          |
+        |     }                                              |
+        |                                                    |
+        |     // Metodo astratto (senza corpo)               |
+        |     public abstract void verso();                  |
+        |                                                    |
+        |     // Metodo concreto                             |
+        |     public void saluta() {                         |
+        |         System.out.println("Ciao, sono " + nome);  |
+        |     }                                              |
+        | }                                                  |
+        +----------------------------------------------------+
+
+    - Polimorfismo
+        Usare le classi astratte permette anche di sfruttare il polimorfismo
+        e.g.
+            Animale cane = new Cane("Nome cane");
+
+
