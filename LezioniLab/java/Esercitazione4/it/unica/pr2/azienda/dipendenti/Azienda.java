@@ -18,7 +18,7 @@ public class Azienda {
     }
 
     public void assumi(Dipendente dipendente) {
-        if(numDipendenti > 5) {
+        if(numDipendenti < 5) {
             arrayDipendenti[numDipendenti] = dipendente;
             numDipendenti++;
         }

@@ -7,6 +7,10 @@ public class TestAuto{
         
         Moto m = new Moto("Yamaha", "MT-09", 2017); //marca, modello, anno
         Moto m2 = new Moto(m);
+        
+        /* ALTRIMENTI NON FUNZIONA */
+        m2.setCilindrata(650); // AGGIUNTO
+
         Auto a = new Auto("Fiat", "Panda", 2016); // marca, modello, anno
         assert a instanceof Veicolo;
         assert m instanceof Veicolo;

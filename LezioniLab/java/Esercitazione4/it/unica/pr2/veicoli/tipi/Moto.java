@@ -13,6 +13,7 @@ public class Moto extends Veicolo {
 
     public Moto(Moto altro) {
         super(altro);
+        this.ABS = altro.ABS;
     }
 
     @Override

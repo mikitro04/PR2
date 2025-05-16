@@ -11,6 +11,7 @@ public class Auto extends Veicolo {
 
     public Auto(Auto altro) {
         super(altro);
+        this.fourAirBag = altro.fourAirBag;
     }
 
     @Override
@@ -34,4 +35,14 @@ public class Auto extends Veicolo {
 
         return ret;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!super.equals(o)) return false;
+        if (!(o instanceof Auto)) return false;
+
+        Auto a = (Auto) o;
+        return this.fourAirBag == a.fourAirBag;
+    }
+
 }

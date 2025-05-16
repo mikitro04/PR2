@@ -32,4 +32,16 @@ public abstract class Veicolo {
     }
 
     public abstract String sicurezza();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Veicolo)) return false;
+
+        Veicolo v = (Veicolo) o;
+        return this.anno == v.anno &&
+            this.cilindrata == v.cilindrata &&
+            this.marca.equals(v.marca) &&
+            this.modello.equals(v.modello);
+    }
 }
