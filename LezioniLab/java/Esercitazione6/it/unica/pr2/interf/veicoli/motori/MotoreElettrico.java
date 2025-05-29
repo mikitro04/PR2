@@ -1,5 +1,5 @@
 package it.unica.pr2.interf.veicoli.motori;
 
-public class MotoreElettrico {
-    
+public interface MotoreElettrico {
+    public double getKw();
 }
