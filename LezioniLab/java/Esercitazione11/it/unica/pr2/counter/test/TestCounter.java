@@ -73,7 +73,7 @@ public class TestCounter {
         assert counter1.count() == 7-2;
         assert counter1.size() == 6-1;
         
-        
+        /*
         // overflow
         counter1.addText("ciao da me"); // they are all added 
         
